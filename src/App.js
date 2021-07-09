@@ -7,13 +7,13 @@ import GlobalStyle from './styles/global';
 import Layout from './components/Layout';
 
 function App() {
-  const localTheme =localStorage.getItem('theme')
+  const localThemes =localStorage.getItem('theme')
   
   const [theme, setTheme] =useState(()=>{
-    if(!localTheme){
+    if(!localThemes){
       return 'dark'
     }
-    return localTheme
+    return localThemes
   });
 
   const currentTheme = useMemo(()=>{
