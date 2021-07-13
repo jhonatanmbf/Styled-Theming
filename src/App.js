@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import {ThemeProvider} from 'styled-components';
 
 import themes from './styles/themes';
@@ -9,6 +9,8 @@ import Layout from './components/Layout';
 function App() {
   const localThemes =localStorage.getItem('theme')
   
+  const firstRender = useRef(true)
+
   const [theme, setTheme] =useState(()=>{
     if(!localThemes){
       return 'dark'
@@ -25,7 +27,13 @@ function App() {
   }
 
   useEffect(()=>{
+    if(firstRender.current){
+      firstRender.current = false;
+      return
+    }
+
     localStorage.setItem('theme', theme);
+    console.debug({theme})
   }, [theme])
 
   return (
